@@ -35,4 +35,6 @@ class ProductCreateSerializer(serializers.ModelSerializer):
             return product
         else:
             raise PermissionDenied("Seller can only make product")
+    
+    
         

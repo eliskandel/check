@@ -22,13 +22,38 @@ class ProductCreateView(CreateAPIView):
     permission_classes = [IsAuthenticated]  # Use IsAuthenticated to ensure the user is logged in
     authentication_classes = [TokenAuthentication]  # Use TokenAuthentication for token-based auth
 
-    
-        
 class ProductListView(ListAPIView):
     serializer_class=ProductSerializer
-    permission_classes=[TokenAuthentication]
-    authentication_classes=[IsAuthenticated]
     pagination_class=ListProductPagination
     filter_backends=[DjangoFilterBackend,filters.SearchFilter]
     search_fields=['name','seller__username']
     queryset=Product.objects.all()
+
+
+class ProductUpdateView(UpdateAPIView):
+    queryset=Product.objects.all()
+    serializer_class=ProductSerializer
+    authentication_classes=[TokenAuthentication]
+    permission_classes=[IsAuthenticated]
+    
+    def get_queryset(self):
+        return Product.objects.filter(seller=self.request.user)
+
+
+class ProductRetrieveView(RetrieveAPIView):
+    serializer_class=ProductSerializer
+    queryset=Product.objects.all()
+    lookup_field='pk'
+
+class ProductDeleteView(DestroyAPIView):
+    queryset=Product.objects.all()
+    serializer_class=ProductSerializer
+    permission_classes=[IsAuthenticated]
+    authentication_classes=[TokenAuthentication]
+    def get_queryset(self):
+        return Product.objects.filter(seller=self.request.user)
+    def perform_destroy(self, instance):
+        return super().perform_destroy(instance)
+    
+
+###review
