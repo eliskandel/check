@@ -41,7 +41,8 @@ INSTALLED_APPS = [
     'user',
     'rest_framework.authtoken',
     'django_filters',
-    'product',
+    'leave',
+  
 ]
 
 MIDDLEWARE = [
@@ -131,3 +132,12 @@ AUTH_USER_MODEL='user.User'
 REST_FRAMEWORK = {
     'DEFAULT_FILTER_BACKENDS': ['django_filters.rest_framework.DjangoFilterBackend']
 }
+
+
+EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
+EMAIL_HOST = 'smtp.gmail.com'
+EMAIL_USE_TLS = True
+EMAIL_PORT = 587
+EMAIL_HOST_USER = 'alishkandel2062@gmail.com'
+EMAIL_HOST_PASSWORD = 'pbch epjo fcyw adko'
+DEFAULT_FOR_EMAIL=EMAIL_HOST_USER

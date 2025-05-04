@@ -23,7 +23,10 @@ from .throttling import UpdateThrottle
 from .pagination import ListPagination
 from rest_framework import filters 
 from django_filters.rest_framework import DjangoFilterBackend
-# Create your views here.
+
+
+
+
 
 class UserCreateView(CreateAPIView):
     serializer_class=UserWriteSerializer
@@ -90,3 +93,6 @@ class UserLogoutView(GenericAPIView):
             return Response({
                 'message':'Invalid Credentials'
             })
+
+
+    
